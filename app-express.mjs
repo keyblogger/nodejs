@@ -27,7 +27,9 @@ app.get('/books', async (req, res) => {
     res.end()
 })
 
-app.listen(3000, () => console.log('Η εφαρμογή τρέχει'))
+const PORT = 3000
+
+app.listen(3000, () => console.log('Η εφαρμογή τρέχει στη θύρα ', PORT))
 
 const htmlTopChunk = "<html>"
 const htmlBottomChunk = "</html>"
