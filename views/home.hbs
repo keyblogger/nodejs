@@ -1,0 +1,9 @@
+<ul>
+    {{#if books}}
+        {{#each books}}
+            <li>
+                {{this.συγγραφέας}}, {{this.τίτλος}}, {{this.εκδόσεις}}, {{this.έτος}}
+            </li>
+        {{/each}}
+    {{/if}}
+</ul>
