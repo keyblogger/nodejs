@@ -1,17 +1,21 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
-  "main": "app.mjs",
+  "main": "app-express.mjs",
   "scripts": {
+    "start": "node handlebars.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
     "express-validator": "^6.14.2",
+    "memorystore": "^1.6.7",
     "nodemon": "^2.0.20",
     "yodasay": "^1.1.9"
   },

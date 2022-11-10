@@ -1,8 +1,22 @@
+import 'dotenv/config'
 import express  from 'express'
 import {BookList} from './book_list_async_await.mjs'
+import session from 'express-session'
+import createMemoryStore from 'memorystore';
 
+// Δημιουργία ενός memory store constructor 
+const MemoryStore = createMemoryStore(session);
+const myBooksSession = session({
+    secret: process.env.SESSION_SECRET,
+    store: new MemoryStore({ checkPeriod: 86400 * 1000 }),
+    resave: false,
+    saveUninitialized: false,
+    name: "myBooks", // αλλιώς θα είναι connect.sid
+    cookie: {
+        maxAge: 1000 * 60 * 20 // 20 λεπτά
+    }
+})
 const app = express()
-
 const bookList = new BookList()
 
 /*bookList.addBookToFile({
@@ -12,6 +26,9 @@ const bookList = new BookList()
     έτος: "2010",
 })*/
 
+
+
+app.use(myBooksSession)
 //app.get('/', (req, res) => res.send('Γειά σου express!'))
 app.get('/books', async (req, res) => {
     res.write(htmlTopChunk)
@@ -28,8 +45,7 @@ app.get('/books', async (req, res) => {
 })
 
 const PORT = 3000
-
-app.listen(3000, () => console.log('Η εφαρμογή τρέχει στη θύρα ', PORT))
+app.listen(PORT, () => console.log('Η εφαρμογή τρέχει στη θύρα ', PORT))
 
 const htmlTopChunk = "<html>"
 const htmlBottomChunk = "</html>"
